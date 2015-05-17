@@ -661,11 +661,11 @@ namespace ProtoBuf.Meta
             {
                 System.Collections.Generic.List<MemberInfo> list = new System.Collections.Generic.List<MemberInfo>();
                 foreach(PropertyInfo prop in type.GetRuntimeProperties()) {
-                    MethodInfo getter = Helpers.GetGetMethod(prop, false, false);
+                    MethodInfo getter = Helpers.GetGetMethod(prop, true, false);
                     if(getter != null && !getter.IsStatic) list.Add(prop);
                 }
-                foreach(FieldInfo fld in type.GetRuntimeFields()) if(fld.IsPublic && !fld.IsStatic) list.Add(fld);
-                foreach(MethodInfo mthd in type.GetRuntimeMethods()) if(mthd.IsPublic && !mthd.IsStatic) list.Add(mthd);
+                foreach(FieldInfo fld in type.GetRuntimeFields()) if(!fld.IsStatic) list.Add(fld);
+                foreach(MethodInfo mthd in type.GetRuntimeMethods()) if(!mthd.IsStatic) list.Add(mthd);
                 foundList = list;
             }
 #else
